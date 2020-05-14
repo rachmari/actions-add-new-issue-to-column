@@ -4,8 +4,8 @@ const graphql = require("@octokit/graphql");
 
 async function run() {
     const myToken = core.getInput("action-token");
-    const projectUrls = core.getInput("project-url").replace(", ", ",").split(",");
-    const columnNames = core.getInput("column-name").replace(", ", ",").split(",");
+    const projectUrls = core.getInput("project-url").split("/,\s+/");
+    const columnNames = core.getInput("column-name").split("/,\s+/");
     const octokit = new github.GitHub(myToken);
     const context = github.context;
     let oneColumn = false;
@@ -19,9 +19,9 @@ async function run() {
 
     console.log(`Action triggered by issue #${context.issue.number}`);
 
-    for (let i = 0; i < projectUrls.length; i++) {
-        let projectUrl = projectUrls[i];
-        let columnName = oneColumn ? columnNames[0] : columnNames[i];
+    for (const item of array) {
+        let projectUrl = projectUrls[item];
+        let columnName = oneColumn ? columnNames[0] : columnNames[item];
         console.log(`Project url: ${projectUrl} column: ${columnName}`)
 
         let info = await getColumnAndIssueInformation(columnName, projectUrl, myToken, context.payload.issue.id);
