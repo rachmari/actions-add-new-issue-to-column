@@ -30,7 +30,7 @@ async function run() {
         } else {
             throw `Unable to find a columnId for the column ${columnName}, with Url:${projectUrl}`;
         }
-    })
+    }
 }
 
 async function createNewCard(octokit, columnId, issueId){
