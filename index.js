@@ -4,8 +4,8 @@ const graphql = require("@octokit/graphql");
 
 async function run() {
     const myToken = core.getInput("action-token");
-    const projectUrls = core.getInput("project-url").split("/,\s+/");
-    const columnNames = core.getInput("column-name").split("/,\s+/");
+    const projectUrls = core.getInput("project-url").split(/,\s+/);
+    const columnNames = core.getInput("column-name").split(/,\s+/);
     const octokit = new github.GitHub(myToken);
     const context = github.context;
     let oneColumn = false;
