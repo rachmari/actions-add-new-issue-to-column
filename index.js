@@ -9,6 +9,7 @@ async function run() {
     const octokit = new github.GitHub(myToken);
     const context = github.context;
     let oneColumn = false;
+    console.log(`ProjectUrls: ${projectUrls} ColumnNames: ${columnNames}`)
 
     if (columnNames.length !== 1 && columnNames.length !== projectUrls.length) {
         return "No action being taken. The number of column items must either be 1 or match the number of items in the project-url input parameter";
@@ -21,6 +22,7 @@ async function run() {
     for (let i = 0; i < projectUrls.length; i++) {
         let projectUrl = projectUrls[i];
         let columnName = oneColumn ? columnNames[0] : columnNames[i];
+        console.log(`Project url: ${projectUrl} column: ${columnName}`)
 
         let info = await getColumnAndIssueInformation(columnName, projectUrl, myToken, context.payload.issue.id);
         if (info.cardId != null){
