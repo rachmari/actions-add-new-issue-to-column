@@ -19,10 +19,9 @@ async function run() {
 
     console.log(`Action triggered by issue #${context.issue.number}`);
 
-    for (const item of projectUrls) {
-        let projectUrl = projectUrls[item];
-        let columnName = oneColumn ? columnNames[0] : columnNames[item];
-        console.log(`Project url: ${projectUrl} column: ${columnName}`)
+    for (let i = 0; i < projectUrls.length; i++) {
+        let columnName = oneColumn ? columnNames[0] : columnNames[i];
+        console.log(`Project url: ${projectUrls[i]} column: ${columnName}`)
 
         let info = await getColumnAndIssueInformation(columnName, projectUrl, myToken, context.payload.issue.id);
         if (info.cardId != null){
